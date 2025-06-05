@@ -1,3 +1,5 @@
+@layer base, mui-components, components, utilities;
+
 @import "tailwindcss";
 
 :root {

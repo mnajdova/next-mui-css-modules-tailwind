@@ -16,21 +16,27 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## The idea of the project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project shows how we could implement Material UI components using CSS modules and use Tailwind CSS to customize them. It uses a Header component (a test component that renders an h1 and appends a single CSS rule - color: blue defined in a CSS layer called mui-components).
+In order for people to use this no CSS in JS version of Material UI, they need to configure their next.js config to contain the following:
 
-## Learn More
+``` next.config.ts
+const nextConfig: NextConfig = {
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@mui/styled-engine": "@mui/styled-engine-noop",
+    }
+    return config
+  },
+};
+```
 
-To learn more about Next.js, take a look at the following resources:
+This config tells next.js to use the Plain CSS styled engine isntead of the default Emotion one. The second config is specifying the order of the CSS layers:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```diff global.css
++ @layer base, mui-components, components, utilities;
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+That's everything, now developers can use Tailwind CSS to override Mateiral UI components that use CSS modules as a styling strategy.
