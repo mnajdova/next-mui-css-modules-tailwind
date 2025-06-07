@@ -18,8 +18,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## The idea of the project
 
-This project shows how we could implement Material UI components using CSS modules and use Tailwind CSS to customize them. It uses a Header component (a test component that renders an h1 and appends a single CSS rule - color: blue defined in a CSS layer called mui-components).
-In order for people to use this no CSS in JS version of Material UI, they need to configure their next.js config to contain the following:
+This project shows how we could implement Material UI components using CSS modules and use Tailwind CSS to customize them. It uses the Slider component as a benchmark.
+In order for people to completely remove Emotion, they need to configure their next.js config to contain the following:
 
 ``` next.config.ts
 const nextConfig: NextConfig = {
